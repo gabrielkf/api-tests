@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Appointment } from '../entities/appointment';
+import { InMemoryAppointmentRepository } from '../repositories/in-memory/in-memory-appointments-repository';
 import { getFutureDate } from '../tests/utils/get-future-date';
 import { CreateAppointment } from './create-appointment';
 
@@ -7,7 +8,9 @@ const NAME = 'John Doe';
 
 describe('Create appointment', () => {
   it('should be able to create an appointment', () => {
-    const createAppointment = new CreateAppointment();
+    const createAppointment = new CreateAppointment(
+      new InMemoryAppointmentRepository()
+    );
 
     const startDate = getFutureDate('2022-09-23');
     const endDate = getFutureDate('2022-09-24');
