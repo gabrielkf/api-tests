@@ -22,10 +22,13 @@ export class CreateAppointment {
       throw new Error('Overlapping appointment');
     }
 
-    return new Appointment({
+    const appointment = new Appointment({
       customer,
       startsAt,
       endsAt,
     });
+
+    await this.appointsRepository.create(appointment);
+    return appointment;
   }
 }
