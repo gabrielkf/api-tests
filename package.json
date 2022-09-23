@@ -1,0 +1,34 @@
+{
+  "name": "api-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielkf/api-tests.git"
+  },
+  "keywords": [
+    "Unit",
+    "test",
+    "Clean",
+    "Architecture"
+  ],
+  "author": "Gabriel Sousa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabrielkf/api-tests/issues"
+  },
+  "homepage": "https://github.com/gabrielkf/api-tests#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "eslint": "^8.23.1",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-promise": "^6.0.1",
+    "typescript": "^4.8.3"
+  }
+}
