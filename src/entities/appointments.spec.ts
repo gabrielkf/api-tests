@@ -2,44 +2,35 @@ import { expect, test } from 'vitest';
 import { getFutureDate } from '../tests/utils/get-future-date';
 import { Appointment } from './appointment';
 
-const NAME = 'John Doe';
+const TEST_CUSTOMER_NAME = 'John Doe';
 
 test('create an appointment', () => {
-  const startDate = getFutureDate('2022-09-23');
-  const endDate = getFutureDate('2022-09-24');
-
   const appointment = new Appointment({
-    customer: NAME,
-    startsAt: startDate,
-    endsAt: endDate,
+    customer: TEST_CUSTOMER_NAME,
+    startsAt: getFutureDate('2022-09-23'),
+    endsAt: getFutureDate('2022-09-24'),
   });
 
   expect(appointment).toBeInstanceOf(Appointment);
-  expect(appointment.customer).toEqual(NAME);
+  expect(appointment.customer).toEqual(TEST_CUSTOMER_NAME);
 });
 
 test('cannot create appointment with end date earlier than start date', () => {
-  const startDate = getFutureDate('2022-09-23');
-  const endDate = getFutureDate('2022-09-22');
-
   expect(() => {
     return new Appointment({
-      customer: NAME,
-      startsAt: startDate,
-      endsAt: endDate,
+      customer: TEST_CUSTOMER_NAME,
+      startsAt: getFutureDate('2022-09-23'),
+      endsAt: getFutureDate('2022-09-22'),
     });
   }).toThrow();
 });
 
 test('cannot create appointment with start date up to current time', () => {
-  const startDate = new Date();
-  const endDate = getFutureDate('2022-09-22');
-
   expect(() => {
     return new Appointment({
-      customer: NAME,
-      startsAt: startDate,
-      endsAt: endDate,
+      customer: TEST_CUSTOMER_NAME,
+      startsAt: new Date(),
+      endsAt: getFutureDate('2022-09-22'),
     });
   }).toThrow();
 });

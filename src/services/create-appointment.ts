@@ -18,7 +18,7 @@ export class CreateAppointment {
         endsAt
       );
 
-    if (overlappingAppointment !== null) {
+    if (overlappingAppointment instanceof Appointment) {
       throw new Error('Overlapping appointment');
     }
 

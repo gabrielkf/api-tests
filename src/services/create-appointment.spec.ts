@@ -4,7 +4,7 @@ import { InMemoryAppointmentRepository } from '../repositories/in-memory/in-memo
 import { getFutureDate } from '../tests/utils/get-future-date';
 import { CreateAppointment } from './create-appointment';
 
-const NAME = 'John Doe';
+const TEST_CUSTOMER_NAME = 'John Doe';
 
 describe('Create appointment', () => {
   it('should be able to create an appointment', () => {
@@ -17,10 +17,30 @@ describe('Create appointment', () => {
 
     expect(
       createAppointment.execute({
-        customer: NAME,
+        customer: TEST_CUSTOMER_NAME,
         startsAt: startDate,
         endsAt: endDate,
       })
     ).resolves.toBeInstanceOf(Appointment);
+  });
+
+  it('should not be able to create an appointment which overlaps another', async () => {
+    const createAppointment = new CreateAppointment(
+      new InMemoryAppointmentRepository()
+    );
+
+    await createAppointment.execute({
+      customer: TEST_CUSTOMER_NAME,
+      startsAt: getFutureDate('2022-09-20'),
+      endsAt: getFutureDate('2022-09-24'),
+    });
+
+    expect(
+      createAppointment.execute({
+        customer: TEST_CUSTOMER_NAME,
+        startsAt: getFutureDate('2022-09-19'),
+        endsAt: getFutureDate('2022-09-21'),
+      })
+    ).rejects.toBeInstanceOf(Error);
   });
 });
