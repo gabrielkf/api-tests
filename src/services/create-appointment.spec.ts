@@ -42,5 +42,29 @@ describe('Create appointment', () => {
         endsAt: getFutureDate('2022-09-21'),
       })
     ).rejects.toBeInstanceOf(Error);
+
+    expect(
+      createAppointment.execute({
+        customer: TEST_CUSTOMER_NAME,
+        startsAt: getFutureDate('2022-09-19'),
+        endsAt: getFutureDate('2022-09-25'),
+      })
+    ).rejects.toBeInstanceOf(Error);
+
+    expect(
+      createAppointment.execute({
+        customer: TEST_CUSTOMER_NAME,
+        startsAt: getFutureDate('2022-09-21'),
+        endsAt: getFutureDate('2022-09-22'),
+      })
+    ).rejects.toBeInstanceOf(Error);
+
+    expect(
+      createAppointment.execute({
+        customer: TEST_CUSTOMER_NAME,
+        startsAt: getFutureDate('2022-09-21'),
+        endsAt: getFutureDate('2022-09-25'),
+      })
+    ).rejects.toBeInstanceOf(Error);
   });
 });
